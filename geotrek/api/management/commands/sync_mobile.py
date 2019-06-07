@@ -164,7 +164,7 @@ class Command(BaseCommand):
                 name = os.path.join(settings.MEDIA_URL.strip('/'), '%s.png' % file_name)
                 dst = os.path.join(self.tmp_root, directory, name)
                 self.mkdirs(dst)
-                cairosvg.svg2png(url=obj.pictogram.path, write_to=dst, child_width=48, child_height=48)
+                cairosvg.svg2png(url=obj.pictogram.path, write_to=dst)
                 image = Image.open(dst)
                 image_final = image.resize((48, 48), Image.ANTIALIAS)
                 image_final.save(dst, optimize=True, quality=95)
