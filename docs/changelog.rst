@@ -7,7 +7,7 @@ CHANGELOG
 
 **Bug fixes**
 
--
+- Translate feedback acknoledgment email
 
 
 2.27.6

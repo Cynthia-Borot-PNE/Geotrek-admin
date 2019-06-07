@@ -1,3 +1,5 @@
+# encoding: utf8
+
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.core import mail
@@ -41,3 +43,7 @@ class EmailSendingTest(TestCase):
                           u'[Geotrek] Feedback from John Doe (john.doe@nowhere.com)')
         self.assertIn(u"Comment : This is a 'comment'", sent_mail.body)
         self.assertIn(u"Lat : 46.5 / Lon : 3", sent_mail.body)
+        sent_mail = mail.outbox[1]
+        self.assertEquals(sent_mail.subject,
+                          u"Geotrek : signalement d'un problème")
+        self.assertIn(u"Nous accusons réception de votre signalement", sent_mail.body)

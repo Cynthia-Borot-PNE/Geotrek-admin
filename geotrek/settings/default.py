@@ -13,6 +13,7 @@ create config files of nginx, etc.
 import os
 
 from django.conf.global_settings import LANGUAGES as LANGUAGES_LIST
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.gis.geos import fromstr
 
 from . import EnvIniReader

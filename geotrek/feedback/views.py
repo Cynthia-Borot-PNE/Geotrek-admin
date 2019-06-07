@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.views.generic.list import ListView
 from django.core.mail import send_mail
+from django.utils.translation import ugettext as _
 from rest_framework.decorators import list_route
 from rest_framework.permissions import AllowAny
 from mapentity import views as mapentity_views
@@ -57,8 +58,15 @@ class ReportViewSet(mapentity_views.MapEntityViewSet):
         response = super(ReportViewSet, self).create(request)
         if settings.MAILALERTSUBJECT and response.status_code == 201:
             send_mail(
-                settings.MAILALERTSUBJECT,
-                settings.MAILALERTMESSAGE,
+                settings.MAILALERTSUBJECT or _("Geotrek : Signal a mistake"),
+                settings.MAILALERTMESSAGE or _("""Hello,
+
+We acknowledge receipt of your feedback, thank you for your interest in Geotrek.
+
+Best regards,
+
+The Geotrek Team
+http://www.geotrek.fr"""),
                 settings.DEFAULT_FROM_EMAIL,
                 [request.data.get('email')]
             )
