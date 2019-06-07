@@ -3,6 +3,7 @@
 import logging
 import filecmp
 import os
+from PIL import Image
 import re
 import shutil
 from time import sleep
@@ -163,7 +164,10 @@ class Command(BaseCommand):
                 name = os.path.join(settings.MEDIA_URL.strip('/'), '%s.png' % file_name)
                 dst = os.path.join(self.tmp_root, directory, name)
                 self.mkdirs(dst)
-                cairosvg.svg2png(url=obj.pictogram.path, write_to=dst)
+                cairosvg.svg2png(url=obj.pictogram.path, write_to=dst, child_width=48, child_height=48)
+                image = Image.open(dst)
+                image_final = image.resize((48, 48), Image.ANTIALIAS)
+                image_final.save(dst, optimize=True, quality=95)
                 if name not in zipfile.namelist():
                     zipfile.write(dst, name)
                 if self.verbosity == 2:
