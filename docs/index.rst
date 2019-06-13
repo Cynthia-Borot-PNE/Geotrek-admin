@@ -1,4 +1,4 @@
-Welcome to Geotrek's documentation!
+Welcome to Geotrek-admin's documentation!
 ===================================
 
 Contents:
